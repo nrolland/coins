@@ -22,8 +22,8 @@ subsets :: Coins -> [Coins]
 subsets = foldl (\s e -> s ++ map (++ [e]) s)  [[]]
 
 changeFor :: Coins -> Sum -> Coins
-changeFor cs s = undefined
-                 
+changeFor cs s = head candidates
+                 where candidates = filter (\se -> sum se == s) (subsets cs) 
                  
 main = hspec spec
 
@@ -32,4 +32,6 @@ spec = do
     describe "subsets" $ do
       it "should work" $ do
           subsets [2,1]   `shouldBe` [[],[2],[1],[2,1]]
-
+    describe "change" $ do
+      it "should work" $ do
+          [2,1] `changeFor` 3  `shouldBe` [2,1]
