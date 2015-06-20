@@ -38,3 +38,4 @@ spec = do
       it "should work" $ do
           [2,1] `changeFor` 3  `shouldBe` Just [2,1]
           [4,3,3,1,1] `changeFor` 6  `shouldBe` Just [3,3]
+          [4,3] `changeFor` 5  `shouldBe` Nothing
