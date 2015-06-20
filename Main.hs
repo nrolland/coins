@@ -36,3 +36,4 @@ spec = do
     describe "change" $ do
       it "should work" $ do
           [2,1] `changeFor` 3  `shouldBe` [2,1]
+          [4,3,3,1,1] `changeFor` 6  `shouldBe` [3,3]
