@@ -9,7 +9,7 @@ type Coins = [Coin]
 -- approche dynamique :                  
 -- si le head est > a la sum, on passe au suivant, fail si pas de suivant
 -- on generalise > vers pas de succes (somme inatteignable)
--- cette approche me parait trop peu expressive
+-- cette approche me parait difficile, trop peu expressive
 
 
 -- approche constructive    
@@ -20,7 +20,11 @@ type Coins = [Coin]
 
 
 subsets :: Coins -> [Coins]
-subsets = undefined                           
+subsets = foldl (\s e -> s ++ map (e:) s)  [[]]
+
+changeFor :: Coins -> Sum -> Coins
+changeFor cs s = undefined
+                 
                  
 main = hspec spec
 
@@ -28,5 +32,5 @@ spec :: Spec
 spec = do
     describe "subsets" $ do
       it "should work" $ do
-          subsets [2,1]   `shouldBe` [[],[2],[1],[2,1]]
+          subsets [2,1]   `shouldBe` [[],[2],[1],[1,2]]
 
