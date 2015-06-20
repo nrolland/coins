@@ -17,7 +17,7 @@ type Coins = [Coin]
 -- je filtre les pieces >
 -- j'enumere tous les subsets possibles, ordonnes selon mes preferences
 -- je filtre ceux sommant a s
--- je prend le premier
+-- je prends le premier
 
 subsets :: Coins -> [Coins]
 subsets = foldl (\s e -> s ++ map (++ [e]) s)  [[]]
