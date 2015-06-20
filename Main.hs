@@ -1,5 +1,6 @@
 import Test.Hspec
 import Data.List
+import Data.Maybe
 
 type Coin = Int 
 type Sum = Int
@@ -21,8 +22,8 @@ type Coins = [Coin]
 subsets :: Coins -> [Coins]
 subsets = foldl (\s e -> s ++ map (++ [e]) s)  [[]]
 
-changeFor :: Coins -> Sum -> Coins
-changeFor cs s = head solutions
+changeFor :: Coins -> Sum -> Maybe Coins
+changeFor cs s = listToMaybe solutions
                  where solutions  = filter (\se -> sum se == s) candidates
                        candidates = subsets (filter (<= s) cs)
                  
@@ -35,5 +36,5 @@ spec = do
           subsets [2,1]   `shouldBe` [[],[2],[1],[2,1]]
     describe "change" $ do
       it "should work" $ do
-          [2,1] `changeFor` 3  `shouldBe` [2,1]
-          [4,3,3,1,1] `changeFor` 6  `shouldBe` [3,3]
+          [2,1] `changeFor` 3  `shouldBe` Just [2,1]
+          [4,3,3,1,1] `changeFor` 6  `shouldBe` Just [3,3]
