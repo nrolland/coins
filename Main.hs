@@ -23,7 +23,8 @@ subsets = foldl (\s e -> s ++ map (++ [e]) s)  [[]]
 
 changeFor :: Coins -> Sum -> Coins
 changeFor cs s = head solutions
-                 where solutions = filter (\se -> sum se == s) (subsets cs) 
+                 where solutions  = filter (\se -> sum se == s) candidates
+                       candidates = subsets (filter (<= s) cs)
                  
 main = hspec spec
 
