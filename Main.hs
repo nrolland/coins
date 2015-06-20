@@ -18,9 +18,8 @@ type Coins = [Coin]
 -- je filtre ceux sommant a s
 -- je prend le premier
 
-
 subsets :: Coins -> [Coins]
-subsets = foldl (\s e -> s ++ map (e:) s)  [[]]
+subsets = foldl (\s e -> s ++ map (++ [e]) s)  [[]]
 
 changeFor :: Coins -> Sum -> Coins
 changeFor cs s = undefined
@@ -32,5 +31,5 @@ spec :: Spec
 spec = do
     describe "subsets" $ do
       it "should work" $ do
-          subsets [2,1]   `shouldBe` [[],[2],[1],[1,2]]
+          subsets [2,1]   `shouldBe` [[],[2],[1],[2,1]]
 
